@@ -1,0 +1,3 @@
+name: vpc
+runtime: go
+description: create an AWS VPC with required network components
