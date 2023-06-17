@@ -188,6 +188,7 @@ type LaunchTemplate struct {
 }
 
 type NodeGroupCreateOutPut struct {
+	NodeGroupID *eks.NodeGroup
 }
 
 type EksCreateOutPut struct {

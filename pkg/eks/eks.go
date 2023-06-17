@@ -243,13 +243,13 @@ func (e *Eks) CreateEKS(ctx *pulumi.Context) (*EksCreateOutPut, error) {
 	}
 
 	// Create NodeGroup
-	_, err = e.CreateEksNodeGroups(ctx, nodeSg.ID(), clusterSg.ID(), cluster.Name)
+	nodeGroupOutput, err := e.CreateEksNodeGroups(ctx, nodeSg.ID(), clusterSg.ID(), cluster.Name)
 	if err != nil {
 		return eksCreateOutput, err
 	}
 	// create Addons
 	for _, addon := range e.ClusterAddons {
-		err := e.CreateAddon(ctx, addon, cluster)
+		err := e.CreateAddon(ctx, addon, cluster, nodeGroupOutput.NodeGroupID)
 		if err != nil {
 			return eksCreateOutput, err
 		}

@@ -226,10 +226,11 @@ func (e *Eks) CreateEksNodeGroups(ctx *pulumi.Context, nodeSecurityGroupId, clus
 		}
 	}
 	//  ###############  Create EKS Node Group  ###############
-	_, err := eks.NewNodeGroup(ctx, e.ManagedNodeGroups.Name, ngArgs)
+	nodeGroup, err := eks.NewNodeGroup(ctx, e.ManagedNodeGroups.Name, ngArgs)
 	if err != nil {
 		return nodeGroupCreateOutput, nil
 	}
+	nodeGroupCreateOutput.NodeGroupID = nodeGroup
 
 	return nodeGroupCreateOutput, nil
 }

@@ -5,7 +5,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-func (e *Eks) CreateAddon(ctx *pulumi.Context, addon Addon, cluster *eks.Cluster) error {
+func (e *Eks) CreateAddon(ctx *pulumi.Context, addon Addon, cluster *eks.Cluster, nodegroup *eks.NodeGroup) error {
 	_addon := &eks.AddonArgs{}
 	_addon.Tags = e.Tags
 	_addon.ClusterName = cluster.Name
@@ -25,7 +25,7 @@ func (e *Eks) CreateAddon(ctx *pulumi.Context, addon Addon, cluster *eks.Cluster
 	}
 
 	_, err := eks.NewAddon(ctx, addon.Name, _addon, pulumi.DependsOn([]pulumi.Resource{
-		cluster,
+		cluster, nodegroup,
 	}))
 	if err != nil {
 		return err
