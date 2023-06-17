@@ -230,7 +230,7 @@ func (e *Eks) CreateEksNodeGroups(ctx *pulumi.Context, nodeSecurityGroupId, clus
 	if err != nil {
 		return nodeGroupCreateOutput, nil
 	}
-	nodeGroupCreateOutput.NodeGroupID = nodeGroup
+	nodeGroupCreateOutput.NodeGroup = nodeGroup
 
 	return nodeGroupCreateOutput, nil
 }
