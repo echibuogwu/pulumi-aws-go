@@ -215,7 +215,7 @@ func (e *Eks) CreateEksNodeGroups(ctx *pulumi.Context, nodeSecurityGroupId, clus
 			Id:      e.ManagedNodeGroups.ExistingLaunchTemplateId,
 			Version: e.ManagedNodeGroups.ExistingLaunchTemplateVersion,
 		}
-	} else {
+	} else if e.ManagedNodeGroups.CreateLaunchTemplate {
 		template, err := e.CreateLaunchTemplate(ctx, nodeSecurityGroupId)
 		ngArgs.LaunchTemplate = &eks.NodeGroupLaunchTemplateArgs{
 			Id:      template.ID(),
@@ -224,6 +224,8 @@ func (e *Eks) CreateEksNodeGroups(ctx *pulumi.Context, nodeSecurityGroupId, clus
 		if err != nil {
 			return nodeGroupCreateOutput, err
 		}
+	} else {
+		ngArgs.DiskSize = e.ManagedNodeGroups.DiskSize
 	}
 	//  ###############  Create EKS Node Group  ###############
 	nodeGroup, err := eks.NewNodeGroup(ctx, e.ManagedNodeGroups.Name, ngArgs)
