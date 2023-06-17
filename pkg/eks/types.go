@@ -192,5 +192,5 @@ type NodeGroupCreateOutPut struct {
 }
 
 type EksCreateOutPut struct {
-	cluster *eks.Cluster
+	Cluster *eks.Cluster
 }

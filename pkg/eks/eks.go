@@ -190,7 +190,7 @@ func (e *Eks) CreateEKS(ctx *pulumi.Context) (*EksCreateOutPut, error) {
 	if err != nil {
 		return eksCreateOutput, err
 	}
-	eksCreateOutput.cluster = cluster
+	eksCreateOutput.Cluster = cluster
 	clusterTag := pulumi.StringMap{}
 	clusterName := cluster.Name.ApplyT(func(clusterName string) string {
 		clusterTag["kubernetes.io/cluster/"+clusterName] = pulumi.String("owned")
