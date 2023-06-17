@@ -109,7 +109,7 @@ type NodeGroup struct {
 	ClusterVersion                     pulumi.String
 	CpuOptions                         pulumi.String
 	CreateIamRole                      pulumi.String
-	CreateLaunchTemplate               pulumi.String
+	CreateLaunchTemplate               pulumi.Bool
 	CreditSpecification                pulumi.String
 	DesiredSize                        pulumi.Int
 	DisableApiTermination              pulumi.String
@@ -137,7 +137,7 @@ type NodeGroup struct {
 	Labels                             pulumi.StringMap
 	ExistingLaunchTemplateId           pulumi.String
 	ExistingLaunchTemplateVersion      pulumi.String
-	LauchTemplate                      LaunchTemplate
+	LaunchTemplate                     LaunchTemplate
 	LicenseSpecifications              pulumi.String
 	MaintenanceOptions                 pulumi.String
 	MaxSize                            pulumi.Int
