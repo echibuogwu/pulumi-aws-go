@@ -190,6 +190,7 @@ func (e *Eks) CreateEKS(ctx *pulumi.Context) (*EksCreateOutPut, error) {
 	if err != nil {
 		return eksCreateOutput, err
 	}
+	eksCreateOutput.cluster = cluster
 	clusterTag := pulumi.StringMap{}
 	clusterName := cluster.Name.ApplyT(func(clusterName string) string {
 		clusterTag["kubernetes.io/cluster/"+clusterName] = pulumi.String("owned")
@@ -249,7 +250,7 @@ func (e *Eks) CreateEKS(ctx *pulumi.Context) (*EksCreateOutPut, error) {
 	}
 	// create Addons
 	for _, addon := range e.ClusterAddons {
-		err := e.CreateAddon(ctx, addon, cluster, nodeGroupOutput.NodeGroupID)
+		err := e.CreateAddon(ctx, addon, cluster, nodeGroupOutput.NodeGroup)
 		if err != nil {
 			return eksCreateOutput, err
 		}
