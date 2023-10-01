@@ -185,6 +185,7 @@ type LaunchTemplate struct {
 	NetworkInterfaces                 ec2.LaunchTemplateNetworkInterfaceArray
 	TagSpecifications                 ec2.LaunchTemplateTagSpecificationArray
 	UserData                          pulumi.String
+	UpdateDefaultVersion  			  pulumi.Bool
 }
 
 type NodeGroupCreateOutPut struct {

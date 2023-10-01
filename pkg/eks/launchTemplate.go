@@ -91,6 +91,10 @@ func (e *Eks) CreateLaunchTemplate(ctx *pulumi.Context, nodeSecurityGroupId pulu
 		launchTemplateArgs.UserData = e.ManagedNodeGroups.LaunchTemplate.UserData
 	}
 
+	if e.ManagedNodeGroups.LaunchTemplate.UpdateDefaultVersion {
+		launchTemplateArgs.UpdateDefaultVersion = pulumi.Bool(true)
+	}
+	
 	template, err := ec2.NewLaunchTemplate(ctx, e.ManagedNodeGroups.Name, launchTemplateArgs)
 	if err != nil {
 		return &ec2.LaunchTemplate{}, err
