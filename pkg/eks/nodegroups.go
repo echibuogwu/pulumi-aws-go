@@ -219,7 +219,7 @@ func (e *Eks) CreateEksNodeGroups(ctx *pulumi.Context, nodeSecurityGroupId, clus
 		template, err := e.CreateLaunchTemplate(ctx, nodeSecurityGroupId)
 		ngArgs.LaunchTemplate = &eks.NodeGroupLaunchTemplateArgs{
 			Id:      template.ID(),
-			Version: pulumi.String("$Latest"),
+			Version: pulumi.Sprintf("%d", template.LatestVersion.ToIntOutput()),
 		}
 		if err != nil {
 			return nodeGroupCreateOutput, err

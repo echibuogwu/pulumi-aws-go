@@ -1,0 +1,27 @@
+encryptionsalt: v1:1e9cRCpZLTU=:v1:X8LoU5WANC38jHPB:eGnKbF4dGbMg7PZmUX6CcD3EhM8+8Q==
+config:
+  aws:region: eu-central-1
+  urbanized:cidrBlock: 10.30.0.0/16
+  urbanized:enableDnsHostnames: true
+  urbanized:enableDnsSupport: true
+  urbanized:instanceTenancy: default
+  urbanized:azCount: 3
+  urbanized:privateSubnetCidrs: "10.30.1.0/24,10.30.2.0/24,10.30.3.0/24"
+  urbanized:publicSubnetCidrs: "10.30.101.0/24,10.30.102.0/24,10.30.103.0/24"
+  urbanized:databaseSubnetCidrs: "10.30.80.0/24,10.30.90.0/24,10.30.100.0/24"
+  urbanized:clusterServiceIpv4Cidr: "172.16.0.0/12"
+  urbanized:nodeGroupConfig:
+    minSize: 1
+    maxSize: 2
+    desiredSize: 1
+    diskSize: 20
+    amiType:
+    instanceTypes: "t3.small"
+    name: t3small
+    capacityType: "ON_DEMAND"
+  urbanized:tags:
+    team: devops
+  urbanized:taints:
+    - key=value:NoSchedule
+    - key2=value2:NoExecute
+  urbanized:updateConfig: '{"maxUnavailable": 2}'
