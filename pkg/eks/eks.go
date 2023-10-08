@@ -165,10 +165,10 @@ func (e *Eks) CreateEKS(ctx *pulumi.Context) (*EksCreateOutPut, error) {
 	cluster, err := eks.NewCluster(ctx, e.Name, &eks.ClusterArgs{
 		RoleArn: eksRole.Arn,
 		VpcConfig: &eks.ClusterVpcConfigArgs{
-			// EndpointPrivateAccess: e.ClusterEndpointPrivateAccess,
-			// EndpointPublicAccess:  e.ClusterEndpointPublicAccess,
+			EndpointPrivateAccess: e.ClusterEndpointPrivateAccess,
+			EndpointPublicAccess:  e.ClusterEndpointPublicAccess,
 			SubnetIds: e.SubnetIds,
-			// PublicAccessCidrs:     e.ClusterEndpointPublicAccessCidrs,
+			PublicAccessCidrs:     e.ClusterEndpointPublicAccessCidrs,
 			SecurityGroupIds: append(pulumi.StringArray{clusterSg.ID()}, e.AdditionalSecurityGroupIds...),
 		},
 		Tags: e.Tags,
